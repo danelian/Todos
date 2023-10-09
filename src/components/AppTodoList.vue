@@ -23,10 +23,12 @@ export default defineComponent({
   methods: {
     toggleTodo(id: number) {
       const targetTodo = this.todos.find((todo: Todo) => todo.id === id)
-
       if (targetTodo) {
         targetTodo.completed = !targetTodo.completed
       }
+    },
+    removeTodo(id: number) {
+      this.todos = this.todos.filter((todo: Todo) => todo.id !== id)
     }
   }
 })
@@ -39,6 +41,7 @@ export default defineComponent({
       :key="todo.id" 
       :todo="todo"
       @toggle-todo="toggleTodo"
+      @remove-todo="removeTodo"
     />
   </ul>
 </template>
