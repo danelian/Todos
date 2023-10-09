@@ -19,12 +19,26 @@ export default defineComponent({
         {id: 2, text: 'Subscribe to the channel', completed: false},
       ]
     }
+  },
+  methods: {
+    toggleTodo(id: number) {
+      const targetTodo = this.todos.find((todo: Todo) => todo.id === id)
+
+      if (targetTodo) {
+        targetTodo.completed = !targetTodo.completed
+      }
+    }
   }
 })
 </script>
 
 <template>
   <ul class="todo-list">
-    <AppTodoItem v-for="todo in todos" :key="todo.id" :todo="todo"/>
+    <AppTodoItem 
+      v-for="todo in todos" 
+      :key="todo.id" 
+      :todo="todo"
+      @toggle-todo="toggleTodo"
+    />
   </ul>
 </template>
